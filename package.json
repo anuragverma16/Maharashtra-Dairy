@@ -1,0 +1,17 @@
+{
+  "name": "maharashtra-dairy",
+  "version": "1.0.0",
+  "description": "Maharashtra Dairy - Full Stack Application",
+  "type": "module",
+  "scripts": {
+    "dev": "cd server && npm run dev",
+    "start": "cd server && npm start",
+    "build": "cd client && npm run build",
+    "seed": "cd server && npm run seed",
+    "seed:admin": "cd server && npm run seed:admin"
+  },
+  "workspaces": [
+    "server",
+    "client"
+  ]
+}

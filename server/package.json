@@ -1,0 +1,28 @@
+{
+  "name": "maharashtra-dairy-server",
+  "version": "1.0.0",
+  "description": "Express + MongoDB API for Maharashtra Dairy",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node build-and-start.js",
+    "dev": "nodemon server.js",
+    "seed": "node src/data/seed.js",
+    "seed:admin": "node src/scripts/seedAdmin.js"
+  },
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cloudinary": "^2.11.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.3",
+    "express-async-errors": "^3.1.1",
+    "express-rate-limit": "^8.7.4",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^8.24.10",
+    "multer": "^2.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}

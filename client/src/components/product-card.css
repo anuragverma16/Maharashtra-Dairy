@@ -1,0 +1,226 @@
+/* Professional product card — used on the public Products page and the admin live preview.
+   Every rule is class-based so the admin dark theme cannot repaint the card. */
+
+/* Fixed-width columns: each card is a compact box instead of a tall strip */
+.product-grid {
+  grid-template-columns: repeat(auto-fill, minmax(320px, 420px));
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+.pcard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 1.1rem 1.1rem 1rem;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: 0 6px 22px rgba(30, 63, 110, 0.07);
+  color: var(--text);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.pcard:hover {
+  transform: translateY(-4px);
+  border-color: var(--gold);
+  box-shadow: 0 14px 34px rgba(30, 63, 110, 0.14);
+}
+
+/* Photo shows the whole pack: "contain" on a soft backdrop, so nothing is cropped away */
+.pcard .pcard-photo {
+  margin: -1.1rem -1.1rem 0.35rem;
+  height: 180px;
+  overflow: hidden;
+  border-radius: 18px 18px 0 0;
+  background:
+    radial-gradient(circle at 50% 45%, #ffffff 0%, var(--cream) 60%, var(--cream-dark) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+}
+.pcard .pcard-photo img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 10px 14px rgba(30, 63, 110, 0.18));
+  transition: transform 0.4s ease;
+}
+.pcard:hover .pcard-photo img { transform: scale(1.05); }
+
+.pcard .pcard-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+.pcard .pcard-icon {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  background: var(--cream-dark);
+  color: var(--navy);
+  border: 1px solid var(--line);
+}
+.pcard:hover .pcard-icon { color: var(--terracotta); border-color: var(--terracotta); }
+
+.pcard .pcard-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; justify-content: flex-end; }
+.pcard .pcard-tag {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: #eef3fa;
+  color: var(--navy);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.pcard .pcard-tag-featured { background: #fbf0dc; color: #8a5a10; }
+
+.pcard .pcard-title {
+  margin: 0.25rem 0 0;
+  font-family: var(--display);
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.25;
+}
+.pcard .pcard-marathi {
+  font-family: var(--marathi);
+  color: var(--terracotta);
+  font-size: 0.95rem;
+  line-height: 1.3;
+}
+.pcard .pcard-tagline {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.85rem;
+  font-weight: 500;
+  line-height: 1.45;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pcard .pcard-buy {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 12px;
+  background: var(--cream);
+  border: 1px dashed var(--line);
+}
+.pcard .pcard-price { font-weight: 700; color: var(--terracotta-dark); font-size: 1rem; }
+.pcard .pcard-sizes { display: flex; flex-wrap: wrap; gap: 0.35rem; list-style: none; }
+.pcard .pcard-sizes li {
+  padding: 0.18rem 0.55rem;
+  border-radius: 6px;
+  background: #ffffff;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.pcard .pcard-desc {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pcard .pcard-benefits { list-style: none; display: grid; gap: 0.35rem; }
+.pcard .pcard-benefits li {
+  position: relative;
+  padding-left: 1.4rem;
+  color: var(--text);
+  font-size: 0.88rem;
+}
+.pcard .pcard-benefits li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--leaf);
+  font-weight: 700;
+}
+
+.pcard .pcard-specs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.75rem;
+  border-radius: 12px;
+  background: #fbfaf6;
+  border: 1px solid var(--line);
+}
+.pcard .pcard-specs > div { min-width: 0; }
+.pcard .pcard-specs dt {
+  color: var(--muted);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.pcard .pcard-specs dd {
+  margin: 0;
+  color: var(--navy);
+  font-size: 0.84rem;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.pcard .pcard-badges { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+.pcard .pcard-badges span {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: #eaf4e4;
+  color: #3f6b28;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.pcard .pcard-footer { margin-top: auto; padding-top: 0.5rem; }
+.pcard .pcard-cta {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  background: var(--navy);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: background 0.2s ease;
+}
+.pcard .pcard-cta:hover { background: var(--terracotta); color: #ffffff; }
+.pcard .pcard-status {
+  display: block;
+  text-align: center;
+  padding: 0.7rem 1rem;
+  border-radius: 999px;
+  background: #f1f1ee;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.pcard.pcard-unavailable { opacity: 0.78; }
+.pcard.pcard-unavailable .pcard-icon { filter: grayscale(0.6); }

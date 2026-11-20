@@ -1,0 +1,163 @@
+/* Top bar above the navbar and the upgraded footer. Class-based, so the older rules in index.css
+   (e.g. `.topbar a { margin-left }`) are overridden cleanly. */
+
+/* ---------- Top bar ---------- */
+.topbar {
+  background: linear-gradient(90deg, var(--navy-dark), var(--navy) 55%, var(--navy-light));
+  color: var(--cream);
+  font-size: 0.8rem;
+  border-bottom: 1px solid rgba(217, 164, 65, 0.35);
+}
+.topbar .topbar-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding: 0.5rem 0;
+  flex-wrap: wrap;
+}
+.topbar .topbar-left,
+.topbar .topbar-right { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 1.1rem; }
+
+.topbar .topbar-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  color: rgba(252, 251, 247, 0.92);
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+.topbar .topbar-item svg { color: var(--gold); flex: 0 0 auto; }
+.topbar a.topbar-item:hover { color: var(--gold); }
+
+.topbar .topbar-est {
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid rgba(217, 164, 65, 0.55);
+  color: var(--gold);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.topbar .topbar-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  background: #25d366;
+  color: #fff;
+  font-weight: 600;
+  margin: 0;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+.topbar .topbar-cta:hover { background: #1da851; color: #fff; transform: translateY(-1px); }
+
+/* ---------- Footer: numbers strip ---------- */
+.footer .footer-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1px;
+  margin: 2.75rem auto 0;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  overflow: hidden;
+}
+.footer .footer-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 1.25rem 0.75rem;
+  background: var(--navy-dark);
+  text-align: center;
+}
+.footer .footer-stat-value {
+  font-family: var(--display);
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+}
+.footer .footer-stat-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #cfc8b6;
+}
+
+/* ---------- Footer: phone block ---------- */
+.footer .footer-phone {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(217, 164, 65, 0.3);
+}
+.footer .footer-phone-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.footer .footer-phone-number {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.02em;
+}
+.footer .footer-phone-number svg { color: var(--gold); }
+.footer .footer-phone-number:hover { color: var(--gold); }
+.footer .footer-whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  align-self: flex-start;
+  margin-top: 0.3rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  background: #25d366;
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.footer .footer-whatsapp:hover { background: #1da851; color: #fff; }
+
+.footer .contact-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  line-height: 1.5;
+}
+.footer .contact-list svg { color: var(--gold); margin-top: 0.25rem; flex: 0 0 auto; }
+.footer .contact-list a { overflow-wrap: anywhere; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  .footer .footer-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 768px) {
+  .topbar .topbar-inner { justify-content: center; text-align: center; }
+  .topbar .topbar-left,
+  .topbar .topbar-right { justify-content: center; gap: 0.4rem 0.9rem; }
+  .topbar .topbar-left .topbar-item:first-child { display: none; }
+  .topbar .topbar-right a.topbar-item:nth-child(2) { display: none; }
+}
+
+@media (max-width: 480px) {
+  .footer .footer-stats { margin-top: 2rem; }
+  .footer .footer-stat { padding: 1rem 0.5rem; }
+}
