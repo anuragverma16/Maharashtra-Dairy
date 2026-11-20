@@ -7,7 +7,8 @@ services:
     runtime: node
     plan: free
     rootDir: server
-    buildCommand: "cd .. && npm install && npm run build"
+    # Install server and client separately (each has its own lockfile with Linux binaries)
+    buildCommand: "npm install --prefix ../server && npm install --prefix ../client && npm run build --prefix ../client"
     startCommand: "npm start"
     healthCheckPath: /api/health
     envVars:
@@ -27,3 +28,11 @@ services:
         sync: false
       - key: ADMIN_NAME
         value: Administrator
+      - key: SESSION_TTL_HOURS
+        value: "12"
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
