@@ -1,6 +1,5 @@
 import Product from "../models/Product.js";
 import mongoose from "mongoose";
-import products from "../data/products.js";
 import { validateProductCategory } from "../config/db.js";
 import { destroyImage } from "./cloudinaryService.js";
 
@@ -143,17 +142,11 @@ export const getDashboardStats = async () => {
   };
 };
 
-// Public list comes from the database. The built-in catalogue is only a fallback
-// for when the database cannot be reached.
+// Public list comes only from the database (the products you add in the admin panel)
 export const getPublicProducts = async (category) => {
-  try {
-    if (mongoose.connection.readyState === 1) {
-      const filter = category ? { category } : {};
-      return await Product.find(filter).sort({ displayOrder: 1, createdAt: 1 });
-    }
-  } catch (err) {
-    console.error("Error fetching products from DB:", err.message);
+  if (mongoose.connection.readyState !== 1) {
+    throw httpError(503, "Products are temporarily unavailable. Please try again shortly.");
   }
-
-  return category ? products.filter((p) => p.category === category) : products;
+  const filter = category ? { category } : {};
+  return await Product.find(filter).sort({ displayOrder: 1, createdAt: 1 });
 };

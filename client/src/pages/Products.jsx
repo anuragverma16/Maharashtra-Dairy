@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import PageHero from "../components/PageHero.jsx";
 import ProductCard from "../components/ProductCard.jsx";
-import fallbackProducts from "../data/products.js";
 import { apiRequest } from "../lib/api.js";
 
 const tabs = [
@@ -13,23 +12,22 @@ const tabs = [
 export default function Products() {
   // null = still loading; [] = the database has no products yet
   const [products, setProducts] = useState(null);
-  const [usingFallback, setUsingFallback] = useState(false);
+  const [loadError, setLoadError] = useState(null);
   const [tab, setTab] = useState("all");
 
   useEffect(() => {
     let cancelled = false;
-    // The API answers { success, data: [...] } straight from the database.
-    // Only if the server cannot be reached do we show the built-in list.
+    // Products come only from the database (the ones added in the admin panel)
     apiRequest("/api/products")
       .then((res) => {
         if (cancelled) return;
         setProducts(Array.isArray(res.data) ? res.data : []);
-        setUsingFallback(false);
+        setLoadError(null);
       })
-      .catch(() => {
+      .catch((err) => {
         if (cancelled) return;
-        setProducts(fallbackProducts);
-        setUsingFallback(true);
+        setProducts([]);
+        setLoadError(err.message || "Products could not be loaded.");
       });
     return () => {
       cancelled = true;
@@ -73,9 +71,7 @@ export default function Products() {
 
           {products === null && <p className="note">Loading products...</p>}
 
-          {usingFallback && (
-            <p className="note">We are showing our standard range while the product list is unavailable.</p>
-          )}
+          {loadError && <p className="note">{loadError}</p>}
 
           {products !== null && (
             <>
